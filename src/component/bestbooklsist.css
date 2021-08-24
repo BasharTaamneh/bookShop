@@ -1,0 +1,30 @@
+/* .d-block{
+    width: 20ch;
+    height:22ch
+} */
+.booklist{
+    /* display: inline-block; */
+    background-color: rgba(135, 141, 146, 0.404);
+}
+.booklist .card{
+    display: inline-block;
+    margin-left:12ch;
+    margin-top: 1ch;
+    box-shadow: 3px 3px 2px 1px rgba(127, 129, 131, 0.74);;
+    /* height: 12ch; */
+    /* background-color:aliceblue; */
+ 
+}
+.booklist .card .card-img-top{
+  width: 25ch;
+  height: 30ch;
+  position: relative;
+  /* top: 15ch; */
+}
+.booklist .card-body{
+    height: 10ch;
+}
+.card-text{
+    position: relative;
+    bottom: 18ch;
+}
