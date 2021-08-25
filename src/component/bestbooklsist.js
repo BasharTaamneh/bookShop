@@ -25,7 +25,7 @@ class best_books extends React.Component {
                             <ListGroup className="list-group-flush">
                               <ListGroupItem>{item.email}</ListGroupItem>
                             </ListGroup>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Button variant="danger">Delete</Button>{' '}
                           </Card>
                         )
 
