@@ -1,8 +1,8 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import Button  from 'react-bootstrap/Button'
-import  Col  from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -10,10 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Fprmodal extends React.Component {
 
-
-
     render() {
-        console.log(this.props)
+        console.log('form prps',this.props)
         return (
             <>
                 <div className="formodal">
@@ -23,33 +21,39 @@ class Fprmodal extends React.Component {
                         </Modal.Header>
 
                         <Modal.Body>
-                        <br/>
-                        <Form onSubmit={this.props.getbookinformation}>
-                            <Form.Group  as={Row} className="FormGroup" >
+                        {/* /////////////////////////////////////////// */}
+                            <br />
+                            <Form onSubmit={this.props.getbookinformation}>
+                                <Form.Group as={Row} className="FormGroup" >
 
-                                <Col sm="12">
-                                    <Form.Control name="bookname" type="text" placeholder="Book Name in english here..." />
-                                </Col>
-                                <hr /><br/>
-                                <Col sm="12">
-                                    <Form.Control name="bookdiscr" type="text" placeholder="Book Discription here..." />
-                                </Col>
-                                <hr /><br/>
-                                <Col sm="12">
-                                    <Form.Control name="bookstatus" type="text" placeholder="Reading Status here..." />
-                                </Col>
-                                <hr /><br/>
+                                    <Col sm="12">
+                                        <Form.Control name="bookname" type="text" placeholder="Book Name in english here..."  />
+                                    </Col>
+                                    <hr /><br />
 
-                            </Form.Group>
-                            <Button  onClick={this.props.handleshow} type="submit"  variant="success">Save changes</Button> {'   it takes moments ^_^'}
-                        </Form>
+                                    <Col sm="12">
+                                        <Form.Control name="bookdiscr" type="text" placeholder="Book Discription here..."  />
+                                    </Col>
+                                    <hr /><br />
+
+                                    <Col sm="12">
+                                        <Form.Control name="bookstatus" type="text" placeholder="Reading Status here..."  />
+                                    </Col>
+                                    <hr /><br />
+
+                                </Form.Group>
+                                <Button onClick={this.props.handleshow} type="submit" variant="success">Save changes</Button> {'   it takes moments ^_^'}
+                            </Form>
+                        {/* ////////////////////////////////////////////////// */}
                         </Modal.Body>
 
                         <Modal.Footer>
                             <Button onClick={this.props.handleshow} variant="secondary">Close</Button>
-                            
+
                         </Modal.Footer>
                     </Modal>
+                    { }
+
                 </div >
             </>
         )
