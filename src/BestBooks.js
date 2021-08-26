@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import './BestBooks.css';
 import axios from 'axios';
@@ -9,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 import { withAuth0 } from '@auth0/auth0-react';
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Row from 'react-bootstrap/Row'
 
 class MyFavoriteBooks extends React.Component {
@@ -27,7 +27,7 @@ class MyFavoriteBooks extends React.Component {
 
 
   ///////////////////////
-  getbookinformation = async (e) => {
+  getaddboks = async (e) => {
     e.preventDefault();
     let coverBurl = `https://coverbookserver.herokuapp.com/coverBook?q=${e.target.bookname.value}`
     let coverdata = await axios.get(coverBurl);
@@ -35,7 +35,7 @@ class MyFavoriteBooks extends React.Component {
       coverbook: coverdata.data,
     });
     let requestdata = {
-      email: this.props.auth0.user.email,
+      email: (this.props.auth0.user.email),
       bookname: e.target.bookname.value,
       bookdiscr: e.target.bookdiscr.value,
       bookstatus: e.target.bookstatus.value,
@@ -43,8 +43,9 @@ class MyFavoriteBooks extends React.Component {
       Book_src: this.state.coverbook.Book_src,
     }
 
-    await axios.post(`http://localhost:3001/Addbook?`, { params: requestdata });
-
+  await axios.post(`http://localhost:3001/Addbook?`, {requestdata});
+    // if(datasended.data.status===200)
+    // {console.log("weeeeeeeee")}
   }
 
 
@@ -92,10 +93,10 @@ class MyFavoriteBooks extends React.Component {
         </Jumbotron>
         {/* //////////////////// */}
         <Form onSubmit={this.getbooks}>
-        <Col sm="6">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Col sm="12">
+          <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control name="uemail" type="email" placeholder="Enter email" />
+            <Form.Control required name="uemail" type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -108,7 +109,7 @@ class MyFavoriteBooks extends React.Component {
         {/* //////////////////// */}
 
         <div><Bestbooklsist showbooks={this.state.showbooks} data={this.state.books} /></div>
-        <Formodalinfo getbookinformation={this.getbookinformation} handleshow={this.handleshow} show={this.state.show} />
+        <Formodalinfo getaddboks={this.getaddboks} handleshow={this.handleshow} show={this.state.show} />
       </>
     )
   }

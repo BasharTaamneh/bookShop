@@ -23,21 +23,21 @@ class Fprmodal extends React.Component {
                         <Modal.Body>
                         {/* /////////////////////////////////////////// */}
                             <br />
-                            <Form onSubmit={this.props.getbookinformation}>
+                            <Form onSubmit={this.props.getaddboks}>
                                 <Form.Group as={Row} className="FormGroup" >
 
                                     <Col sm="12">
-                                        <Form.Control name="bookname" type="text" placeholder="Book Name in english here..."  />
+                                        <Form.Control required name="bookname" type="text" placeholder="Book Name in english here..."  />
                                     </Col>
                                     <hr /><br />
 
                                     <Col sm="12">
-                                        <Form.Control name="bookdiscr" type="text" placeholder="Book Discription here..."  />
+                                        <Form.Control required name="bookdiscr" type="text" placeholder="Book Discription here..."  />
                                     </Col>
                                     <hr /><br />
 
                                     <Col sm="12">
-                                        <Form.Control name="bookstatus" type="text" placeholder="Reading Status here..."  />
+                                        <Form.Control required name="bookstatus" type="text" placeholder="Reading Status here..."  />
                                     </Col>
                                     <hr /><br />
 
