@@ -25,7 +25,8 @@ class best_books extends React.Component {
                                         <ListGroup.Item>Author_name:  {item.author_name} </ListGroup.Item>
                                     </ListGroup>
                                     <Card.Body>
-                                        <Button variant="primary">Update</Button><Button variant="danger">Delete</Button>
+                                        <Button  variant="primary">Update</Button>
+                                        <Button onClick={()=>this.props.deleteBook(item._id)} variant="danger">Delete</Button>
                                     </Card.Body>
                                 </Card>
 

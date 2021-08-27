@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import './BestBooks.css';
@@ -6,10 +7,9 @@ import Formodalinfo from './component/Formodalinfo'
 import Bestbooklsist from './component/bestbooklslist'
 import Button from 'react-bootstrap/Button'
 import { withAuth0 } from '@auth0/auth0-react';
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Row from 'react-bootstrap/Row'
+// import swal from 'sweetalert';
+
 
 class MyFavoriteBooks extends React.Component {
 
@@ -20,13 +20,13 @@ class MyFavoriteBooks extends React.Component {
       coverbook: [],
       show: false,
       showbooks: false,
+      theaddedata:[],
     }
 
   }
-  //
+  
 
 
-  ///////////////////////
   getaddboks = async (e) => {
     e.preventDefault();
     let coverBurl = `https://coverbookserver.herokuapp.com/coverBook?q=${e.target.bookname.value}`
@@ -34,48 +34,57 @@ class MyFavoriteBooks extends React.Component {
     await this.setState({
       coverbook: coverdata.data,
     });
+    
     let requestdata = {
-      email: (this.props.auth0.user.email),
+      email: this.props.auth0.user.email,
       bookname: e.target.bookname.value,
       bookdiscr: e.target.bookdiscr.value,
       bookstatus: e.target.bookstatus.value,
       author_name: this.state.coverbook.author_name,
       Book_src: this.state.coverbook.Book_src,
     }
+    await this.setState({
+      theaddedata:requestdata
+    })
 
-  await axios.post(`http://localhost:3001/Addbook?`, {requestdata});
-    // if(datasended.data.status===200)
-    // {console.log("weeeeeeeee")}
+ let nwdata= await axios.post(`http://localhost:3001/Addbook?`,this.state.theaddedata);
+
+    await this.setState({
+      books:nwdata.data,
+    })
   }
 
+    ///////////////////////
+    componentDidMount = async () => {
+      let useremail=this.props.auth0.user.email
+      let data = await axios.get(`http://localhost:3001/books?uemail=${useremail}`);
+  
+    await  this.setState({
+        books: data.data,
+        showbooks: true,
+      });
+      console.log('email is: ', useremail)
+  
+      console.log('booksData is: ', this.state.books)
+    }
+    //////////////////////////////////
+      /////////////////////////
+  deleteBook= async(BookID)=>{
+    let nwdata_afterdelete= await axios.delete(`http://localhost:3001/deletbook/${BookID}?uemail=${this.props.auth0.user.email}`);
 
-  ///////////////////////
-
-
-  getbooks = async (e) => {
-    e.preventDefault();
-    let useremail=e.target.uemail.value
-    let data = await axios.get(`http://localhost:3001/books?uemail=${useremail}`);
-
-    this.setState({
-      books: data.data,
-      showbooks: true,
-    });
-    console.log('email is: ', useremail)
-
-    console.log('booksData is: ', this.state.books)
+   await this.setState({
+      books: nwdata_afterdelete.data,
+    })
+   
   }
-
-
-
-  //////////////////////////////////
+  ////////////////////////
   handleshow = () => {
     this.setState({
       show: !this.state.show,
       coverbook: [],
     })
   }
-
+  ////////////////////////
 
 
   render() {
@@ -91,8 +100,18 @@ class MyFavoriteBooks extends React.Component {
           </p>
           <Button onClick={this.handleshow} variant="outline-dark">Add book to your favourite</Button>
         </Jumbotron>
+        <div><Bestbooklsist deleteBook={this.deleteBook} showbooks={this.state.showbooks} data={this.state.books} /></div>
+        <Formodalinfo getaddboks={this.getaddboks} handleshow={this.handleshow} show={this.state.show} />
+      </>
+    )
+  }
+}
+
+export default withAuth0(MyFavoriteBooks);
+
+
         {/* //////////////////// */}
-        <Form onSubmit={this.getbooks}>
+        {/* <Form onSubmit={this.getbooks}>
         <Col sm="12">
           <Form.Group as={Row} className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -105,14 +124,5 @@ class MyFavoriteBooks extends React.Component {
             GET YOUR BOOKS
           </Button>
          </Col>
-        </Form>
+        </Form> */}
         {/* //////////////////// */}
-
-        <div><Bestbooklsist showbooks={this.state.showbooks} data={this.state.books} /></div>
-        <Formodalinfo getaddboks={this.getaddboks} handleshow={this.handleshow} show={this.state.show} />
-      </>
-    )
-  }
-}
-
-export default withAuth0(MyFavoriteBooks);
