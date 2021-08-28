@@ -52,8 +52,6 @@ class Fprmodal extends React.Component {
 
                         </Modal.Footer>
                     </Modal>
-                    { }
-
                 </div >
             </>
         )
