@@ -50,7 +50,7 @@ class MyFavoriteBooks extends React.Component {
       theaddedata: requestdata
     })
 
-    let nwdata = await axios.post(`http://localhost:3001/Addbook?`, this.state.theaddedata);
+    let nwdata = await axios.post(`https://canofbook0.herokuapp.com/Addbook?`, this.state.theaddedata);
 
     await this.setState({
       books: nwdata.data,
@@ -60,7 +60,7 @@ class MyFavoriteBooks extends React.Component {
   ///////////////////////
   componentDidMount = async () => {
     let useremail = this.props.auth0.user.email
-    let data = await axios.get(`http://localhost:3001/books?uemail=${useremail}`);
+    let data = await axios.get(`https://canofbook0.herokuapp.com/books?uemail=${useremail}`);
 
     await this.setState({
       books: data.data,
@@ -73,7 +73,7 @@ class MyFavoriteBooks extends React.Component {
   //////////////////////////
   /////////////////////////
   deleteBook = async (BookID) => {
-    let nwdata_afterdelete = await axios.delete(`http://localhost:3001/deletbook/${BookID}?uemail=${this.props.auth0.user.email}`);
+    let nwdata_afterdelete = await axios.delete(`https://canofbook0.herokuapp.com/deletbook/${BookID}?uemail=${this.props.auth0.user.email}`);
 
     await this.setState({
       books: nwdata_afterdelete.data,
@@ -102,12 +102,12 @@ class MyFavoriteBooks extends React.Component {
       bookstatus: e.target.updatebookstatus.value,
       author_name: this.state.updateBook.author_name,
       Book_src: this.state.updateBook.Book_src,
-      uemail: this.props.auth0.user.email
+      email: this.props.auth0.user.email
     }
      let  Book_id = this.state.updateBook._id;
-     let  newbookdata = await axios.put(`http://localhost:3001/Updatebook/${Book_id}`, { params: updatedata });
+     let  newbookdata = await axios.put(`https://canofbook0.herokuapp.com/Updatebook/${Book_id}`, updatedata );
     this.setState({
-      book: newbookdata.data,
+      books: newbookdata.data
     })
   }
   ////////////////////////
