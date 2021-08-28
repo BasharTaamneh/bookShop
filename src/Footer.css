@@ -1,0 +1,17 @@
+.footer {
+   
+        padding: 3ch;
+        display:inline-flexbox;     
+        position:relative; 
+        bottom: 0;
+        width: 100%;
+      
+}
+.footer a{
+position: absolute;
+left: 62ch;
+}
+.footerbrand {
+    margin-left: 40ch;
+   
+}

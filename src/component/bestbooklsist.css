@@ -2,29 +2,40 @@
     width: 20ch;
     height:22ch
 } */
-.booklist{
+/* .booklist{ */
     /* display: inline-block; */
-    background-color: rgba(135, 141, 146, 0.404);
+    /* background-color: rgba(240, 245, 250, 0.404);
+/* } */
+.booklist{
+height: 300ch;
+background-color:rgba(231, 231, 231, 0.589);
 }
 .booklist .card{
-    display: inline-block;
+    display:inline-flex;
     margin-left:12ch;
     margin-top: 1ch;
-    box-shadow: 3px 3px 2px 1px rgba(127, 129, 131, 0.74);;
-    /* height: 12ch; */
-    /* background-color:aliceblue; */
+    box-shadow: 3px 3px 2px 1px rgba(141, 129, 129, 0.815);
+    margin-top: 8ch;
+    height:62.1ch;
+}
+
  
-}
-.booklist .card .card-img-top{
-  width: 25ch;
+
+.booklist .card .card-img-top{ 
+  width: 33.3ch;
   height: 30ch;
-  position: relative;
-  /* top: 15ch; */
 }
-.booklist .card-body{
-    height: 10ch;
+
+
+
+ .card-body{
+    height: 100ch;
+    color: white;
+    font-size:5ch;
+
 }
 .card-text{
-    position: relative;
+    position: absolute;
     bottom: 18ch;
 }
+
